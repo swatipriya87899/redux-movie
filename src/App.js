@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { setMovieData } from './Redux/Movie';
+import { useDispatch } from 'react-redux';
 
-function App() {
+
+const App = () => {
+
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+    getData();
+  },[])
+
+  const getData = async() => {
+    let data = await fetch('http://www.omdbapi.com/?i=tt3896198&apikey=c22820f1&s=Hero&type=movie');
+    data=await data.json();
+    dispatch(setMovieData(data))
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div>App</div>
+  )
 }
 
-export default App;
+export default App
